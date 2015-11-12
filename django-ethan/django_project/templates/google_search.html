@@ -1,0 +1,128 @@
+<html>
+  <head>
+  
+    <!-- Bootstrap core CSS -->
+    <link href="/static/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/static/dashboard.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="/static/assets/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="/static/assets/js/ie10-viewport-bug-workaround.js"></script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!--Load the AJAX API--> 
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+	<script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['PriceGroup', 'Target'],
+          {{SuperList}}
+        ]);
+
+        var options = {
+            title: 'Crawler2 comparison',
+             hAxis: {title: 'Count',
+			 viewWindow: {
+			     min: 0,
+			     max: 600
+			    }
+			},
+			 vAxis: {title: 'Price',
+			 viewWindow: {
+				 min: 0,
+				 max: 40
+			    } 
+			},
+            legend: '',
+            curveType: 'function'
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('chart_div_curveline2'));
+        chart.draw(data, options);
+      }
+    </script>
+
+
+
+  </head>
+  <body>
+
+
+    <!--Div that will hold the pie chart-->
+		<div class="progress">
+		  <div class="progress-bar progress-bar-striped active"  role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
+		    <span class="sr-only">{{percentage_number}}% Complete</span>
+		  </div>
+		</div>
+      
+       
+    <form action="." method="post">{%csrf_token%}
+		{{ form.non_field_errors }}
+<div class="container">
+<div class = "row">		
+	    <div class="col-md-4">
+	        {{ form.subject.errors }}
+	        <label for="id_subject">The subject to search:</label>
+	        {{ form.subject }}
+	    </div>
+</div>
+<br \>
+<div class = "row">	
+	    <div class="col-md-4">
+	        {{ form.city.errors }}
+	        <label for="id_subject">The city or area to search:</label>
+	        {{ form.city }}
+	    </div>
+</div>
+<br \>
+<div class = "row">	
+	    <div class="col-md-4">
+	        {{ form.message.errors }}
+	        <label for="id_message">search depth:</label>
+	        {{ form.message }}
+	    </div>
+</div>
+<br \>
+<div class = "row">	
+	    <div class="col-md-4">
+		<input type="submit" value="Analyze" class="btn btn-primary" />
+		</div>
+</div>
+</div>
+	 </form>
+     <div id="chart_div_curveline2" style="width: 1300px; height: 900px;"></div>
+     YOU SELECTED subject is {{subject}} <br \> Searching depth is {{depth}}
+     
+     Logic is <br \>
+        using SuperList_Curve2<br \>
+       Price (Y) vs Count(*) (X)<br \><br \><br \>
+    
+    <br \>select 
+	<br \>	price as castive,
+	<br \>	count(*) as count
+	<br \>	from YINIC_CRAWLER_CACHE
+	<br \>	where price < 40000 and Price <> "NA" AND PRICE > 0 group by castive
+	<br \>	order by CAST(castive AS unsigned) ASC
+
+    <br \><br \><br \><br \><br \><br \>
+    
+     <p class="bg-success"><h1>Real Time crawler {{name}}</h1></p>
+       <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="/static/dist/js/bootstrap.min.js"></script>
+    <script src="/static/assets/js/docs.min.js"></script>
+  </body>
+</html>

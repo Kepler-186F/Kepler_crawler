@@ -1,0 +1,113 @@
+<html>
+  <head>
+    <!--Load the AJAX API--> 
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <!----
+    <script type="text/javascript">
+
+      // Load the Visualization API and the piechart package.
+      google.load('visualization', '1.0', {'packages':['corechart']});
+
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.setOnLoadCallback(drawChart);
+
+      // Callback that creates and populates a data table,
+      // instantiates the pie chart, passes in the data and
+      // draws it.
+      function drawChart() {
+
+        // Create the data table.
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Topping');
+        data.addColumn('number', 'Slices');
+        data.addRows([
+          ['Ethan', {{ETHAN}}],
+          ['Onions', {{ONIONS}}],
+          ['Olives', {{OLIVES}}],
+          ['Zucchini', {{ZUCC}}],
+          ['Pepperoni', {{PEP}}]
+        ]);
+
+        // Set chart options
+        var options = {'title':'{{title}}',
+                       'width':400,
+                       'height':300,
+                       colors: ['#e0440e', '#e6693e', '#ec8f6e', '#f3b49f', '#f6c7b6']
+                       };
+
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Year', 'Sales', 'Expenses'],
+          ['2004',  1000,      400],
+          ['2005',  1170,      460],
+          ['2006',  660,       1120],
+          ['2007',  1030,      540]
+        ]);
+
+        var options = {
+          title: 'Company Performance',
+          curveType: 'function'
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
+    
+    
+      ---->
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Time', 'Price'],
+          {{SuperList}}
+        ]);
+        var options = {
+          title: 'Time vs Price comparison',
+          hAxis: {title: 'Time', minValue: 0, maxValue: 30},
+          vAxis: {title: 'Price', minValue: 0, maxValue: 10},
+          legend: 'none'
+        };
+        var chart = new google.visualization.ScatterChart(document.getElementById('chart_div_dot'));
+        chart.draw(data, options);
+      }
+    </script>
+  
+    
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Year', 'Expenses'],
+		  {{SuperList}}
+        ]);
+
+        var options = {
+          title: 'Company Performance'
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
+    
+  </head>
+
+
+  <body>
+    <!--Div that will hold the pie chart-->
+     <div id="chart_div" style="width: 900px; height: 500px;"></div>
+     <div id="chart_div_dot" style="width: 900px; height: 500px;"></div>
+     
+    <h1>CERNER CLINIC DASHBOARD AUTO COMPARISON {{name}}
+  </body>
+</html>
